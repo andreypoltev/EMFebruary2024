@@ -4,10 +4,7 @@ import android.util.Log
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
-import androidx.compose.material.IconButton
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -29,10 +26,10 @@ import androidx.navigation.compose.rememberNavController
 import com.andreypoltev.emfebruary2024.screens.CartScreen
 import com.andreypoltev.emfebruary2024.screens.CatalogScreen
 import com.andreypoltev.emfebruary2024.screens.FavoritesScreen
-import com.andreypoltev.emfebruary2024.screens.ProfileScreen
 import com.andreypoltev.emfebruary2024.screens.ItemDetailsScreen
 import com.andreypoltev.emfebruary2024.screens.MainScreen
 import com.andreypoltev.emfebruary2024.screens.OffersScreen
+import com.andreypoltev.emfebruary2024.screens.ProfileScreen
 import com.andreypoltev.emfebruary2024.screens.topbars.FavoritesTopBar
 import com.andreypoltev.emfebruary2024.screens.topbars.ItemDetailsTopBar
 

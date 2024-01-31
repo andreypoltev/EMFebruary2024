@@ -10,17 +10,12 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Send
-import androidx.compose.material.icons.filled.Share
-import androidx.compose.material3.BottomAppBar
-import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -35,13 +30,12 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.andreypoltev.emfebruary2024.MainViewModel
-import com.andreypoltev.emfebruary2024.screens.composables.FeedbackRow
-import com.andreypoltev.emfebruary2024.screens.composables.PriceRow
 import com.andreypoltev.emfebruary2024.R
 import com.andreypoltev.emfebruary2024.screens.composables.BrandCard
-import com.andreypoltev.emfebruary2024.screens.composables.CustomBottomBar
 import com.andreypoltev.emfebruary2024.screens.composables.CustomProgressIndicator
 import com.andreypoltev.emfebruary2024.screens.composables.Details
+import com.andreypoltev.emfebruary2024.screens.composables.FeedbackRow
+import com.andreypoltev.emfebruary2024.screens.composables.PriceRow
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

@@ -1,6 +1,5 @@
 package com.andreypoltev.emfebruary2024.screens.composables
 
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
