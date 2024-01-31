@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">EMFebruary2024</string>
+    <string name="description">Описание</string>
+    <string name="hide_description">Скрыть</string>
+    <string name="show_description">Подробнее</string>
+    <string name="details">Характеристики</string>
+    <string name="sku">Артикул</string>
+    <string name="ingridients">Состав</string>
+    <string name="profile">Личный кабинет</string>
+    <string name="favorites">Избранное</string>
+    <string name="stores">Магазины</string>
+    <string name="feedback">Обратная связь</string>
+    <string name="eula">Оферта</string>
+    <string name="returns">Возврат товара</string>
+    <string name="login">Вход</string>
+    <string name="main">Главная</string>
+    <string name="offers">Акции</string>
+    <string name="cart">Корзина</string>
+    <string name="catalog">Catalog</string>
+</resources>

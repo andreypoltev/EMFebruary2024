@@ -3,25 +3,32 @@ package com.andreypoltev.emfebruary2024
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.andreypoltev.emfebruary2024.model.APIResponse
+import com.andreypoltev.emfebruary2024.data.APIResponse
+import com.andreypoltev.emfebruary2024.data.model.Item
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.request.get
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class MainViewModel : ViewModel() {
 
+    private val _items = MutableStateFlow<List<Item>>(emptyList())
+    val items = _items.asStateFlow()
+
+
     init {
         viewModelScope.launch(Dispatchers.IO) {
-            val response = getApiResponse()
+            _items.value = getApiResponse()
+//            val response = getApiResponse().items
         }
     }
 
-    suspend fun getApiResponse(): APIResponse {
+    suspend fun getApiResponse(): List<Item> {
         try {
             val client = HttpClient() {
                 install(ContentNegotiation) {
@@ -33,15 +40,17 @@ class MainViewModel : ViewModel() {
             val response = client.get(link)
             client.close()
 
-            Log.d("MyResponse", response.body())
-            Log.d("MyResponse", response.status.toString())
+//            Log.d("MyResponse", response.body())
+//            Log.d("MyResponse", response.status.toString())
 
-            return response.body()
+//            val r: APIResponse = response.body<APIResponse>()
+
+            return response.body<APIResponse>().items
         } catch (e: Exception) {
 //            _toastMessage.value = e.message.toString()
             // Handle exception, log, or rethrow as needed
             Log.e("MyResponse", "Error fetching API response: ${e.message}")
-            throw e
+            return emptyList()
         } finally {
 //            _toastMessage.value = "Info loaded successfully"
             // Any cleanup or finalization code

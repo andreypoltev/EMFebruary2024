@@ -53,12 +53,20 @@ android {
 
 dependencies {
 
+    implementation("androidx.compose.material:material:1.6.0")
+
+
+    val nav_version = "2.7.6"
+    implementation("androidx.navigation:navigation-compose:$nav_version")
+
 
     val ktor_version = "2.3.7"
     implementation("io.ktor:ktor-client-core:$ktor_version")
     implementation("io.ktor:ktor-client-content-negotiation:$ktor_version")
     implementation("io.ktor:ktor-serialization-kotlinx-json:$ktor_version")
     implementation("io.ktor:ktor-client-cio:$ktor_version")
+
+
 
 
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.2")

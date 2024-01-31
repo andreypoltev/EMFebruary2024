@@ -1,4 +1,4 @@
-package com.andreypoltev.emfebruary2024.model
+package com.andreypoltev.emfebruary2024.data.model
 
 
 import kotlinx.serialization.SerialName
@@ -15,7 +15,7 @@ data class Item(
     @SerialName("price")
     val price: Price = Price(),
     @SerialName("feedback")
-    val feedback: Feedback = Feedback(),
+    val feedback: Feedback? = Feedback(),
     @SerialName("tags")
     val tags: List<String> = listOf(),
     @SerialName("available")

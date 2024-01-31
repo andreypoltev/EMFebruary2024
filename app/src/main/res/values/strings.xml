@@ -1,3 +1,20 @@
 <resources>
     <string name="app_name">EMFebruary2024</string>
+    <string name="description">Description</string>
+    <string name="hide_description">Hide</string>
+    <string name="show_description">More</string>
+    <string name="details">Details</string>
+    <string name="sku">SKU</string>
+    <string name="ingridients">Ingridients</string>
+    <string name="profile">Profile</string>
+    <string name="favorites">Favorites</string>
+    <string name="stores">Stores</string>
+    <string name="feedback">Feedback</string>
+    <string name="eula">EULA</string>
+    <string name="returns">Returns</string>
+    <string name="login">Login</string>
+    <string name="main">Home</string>
+    <string name="offers">Offers</string>
+    <string name="cart">Cart</string>
+    <string name="catalog">Catalog</string>
 </resources>
