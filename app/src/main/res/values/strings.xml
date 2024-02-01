@@ -17,4 +17,9 @@
     <string name="offers">Offers</string>
     <string name="cart">Cart</string>
     <string name="catalog">Catalog</string>
+    <string name="favorites_missing">No favorites yet</string>
+    <string name="item">Item</string>
+    <string name="log_in">Login</string>
+    <string name="log_out">Logout</string>
+    <string name="add_to_cart">Add to Cart</string>
 </resources>

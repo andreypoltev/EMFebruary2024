@@ -5,6 +5,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.andreypoltev.emfebruary2024.data.APIResponse
 import com.andreypoltev.emfebruary2024.data.model.Item
+import com.andreypoltev.emfebruary2024.domain.ItemDao
+import com.andreypoltev.emfebruary2024.domain.User
+import com.andreypoltev.emfebruary2024.domain.UserDao
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
@@ -14,11 +17,58 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
-class MainViewModel : ViewModel() {
+class MainViewModel(val itemDao: ItemDao, val userDao: UserDao) : ViewModel() {
 
     private val _items = MutableStateFlow<List<Item>>(emptyList())
     val items = _items.asStateFlow()
+
+    fun flowFavorites() = itemDao.flowAllItems()
+
+    fun flowUsers() = userDao.flowAllUsers()
+
+    fun clearDb() = viewModelScope.launch(Dispatchers.IO) {
+        userDao.clearTable()
+    }
+
+    fun flowRowCount() = itemDao.flowRowCount()
+
+    fun flowUserCount() = userDao.flowUserCount()
+
+    fun insertUser(user: User) {
+        viewModelScope.launch(Dispatchers.IO) {
+            userDao.insertUser(user)
+        }
+    }
+
+//    suspend fun addItem(item: Item) = withContext(Dispatchers.IO) {
+//        itemDao.insertItem(item)
+//
+//    }
+//
+//    suspend fun removeItem(item: Item) = withContext(Dispatchers.IO) {
+//        itemDao.removeItem(item)
+//
+//    }
+
+    fun addOrRemoveItem(item: Item) {
+
+        viewModelScope.launch {
+
+            val items = itemDao.getAllItems()
+
+            if (item in items) {
+                itemDao.removeItem(item)
+
+            } else {
+                itemDao.insertItem(item)
+            }
+
+        }
+
+
+    }
 
 
     init {
@@ -47,6 +97,7 @@ class MainViewModel : ViewModel() {
 
             return response.body<APIResponse>().items
         } catch (e: Exception) {
+
 //            _toastMessage.value = e.message.toString()
             // Handle exception, log, or rethrow as needed
             Log.e("MyResponse", "Error fetching API response: ${e.message}")

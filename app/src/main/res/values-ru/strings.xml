@@ -18,4 +18,9 @@
     <string name="offers">Акции</string>
     <string name="cart">Корзина</string>
     <string name="catalog">Catalog</string>
+    <string name="favorites_missing">Нет избранного</string>
+    <string name="item">Товар</string>
+    <string name="log_in">Войти</string>
+    <string name="log_out">Выйти</string>
+    <string name="add_to_cart">Добавить в корзину</string>
 </resources>

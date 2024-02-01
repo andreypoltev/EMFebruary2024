@@ -1,11 +1,15 @@
 package com.andreypoltev.emfebruary2024.data.model
 
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
+@Entity
 @Serializable
 data class Item(
+    @PrimaryKey
     @SerialName("id")
     val id: String = "",
     @SerialName("title")

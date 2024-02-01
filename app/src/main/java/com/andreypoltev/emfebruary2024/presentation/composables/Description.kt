@@ -1,4 +1,4 @@
-package com.andreypoltev.emfebruary2024.screens.composables
+package com.andreypoltev.emfebruary2024.presentation.composables
 
 import androidx.compose.runtime.Composable
 

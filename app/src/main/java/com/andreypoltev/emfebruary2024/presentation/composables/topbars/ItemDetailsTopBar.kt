@@ -1,4 +1,4 @@
-package com.andreypoltev.emfebruary2024.screens.topbars
+package com.andreypoltev.emfebruary2024.presentation.composables.topbars
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack

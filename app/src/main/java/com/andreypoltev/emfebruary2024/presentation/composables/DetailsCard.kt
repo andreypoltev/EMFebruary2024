@@ -1,4 +1,4 @@
-package com.andreypoltev.emfebruary2024.screens.composables
+package com.andreypoltev.emfebruary2024.presentation.composables
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
