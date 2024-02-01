@@ -1,0 +1,12 @@
+[versions]
+androidGradlePlugin = "8.2.0"
+kotlinxSerializationJson = "1.6.2"
+navigationCompose = "2.7.6"
+
+[libraries]
+androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigationCompose" }
+kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
+
+[plugins]
+#id("com.android.application") version "8.2.0" apply false
+android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }
