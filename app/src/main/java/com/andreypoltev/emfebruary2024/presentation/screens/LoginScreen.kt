@@ -10,9 +10,13 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material3.Card
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -31,6 +35,8 @@ import androidx.compose.ui.unit.sp
 import com.andreypoltev.emfebruary2024.MainViewModel
 import com.andreypoltev.emfebruary2024.R
 import com.andreypoltev.emfebruary2024.domain.User
+import com.andreypoltev.emfebruary2024.isValidPhoneNumber
+import com.andreypoltev.emfebruary2024.soFarSoGood
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -75,13 +81,23 @@ fun LoginScreen(viewModel: MainViewModel) {
             TextField(
                 value = phoneNumber,
                 onValueChange = {
-                    phoneNumber = it
+                    if (soFarSoGood(it) && it.length <= 16) {
+                        phoneNumber = it
 
-                    phoneIsValid = Patterns.PHONE.matcher(it).matches()
+                    }
+
+                    phoneIsValid = isValidPhoneNumber(phoneNumber)
 
 
                 },
-                label = { Text("+7 ХХХ ХХХ-ХХ-ХХ") },
+                label = { Text("+7 ХХХ ХХХ ХХ ХХ") },
+                trailingIcon = {
+                    if (phoneNumber.isNotEmpty()) {
+                        IconButton(onClick = { phoneNumber = "" }) {
+                            Icon(Icons.Default.Clear, "Clear phone number")
+                        }
+                    }
+                },
                 modifier = Modifier.fillMaxWidth(),
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Phone)
             )
