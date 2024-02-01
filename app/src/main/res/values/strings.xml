@@ -22,4 +22,6 @@
     <string name="log_in">Login</string>
     <string name="log_out">Logout</string>
     <string name="add_to_cart">Add to Cart</string>
+    <string name="eula_1">By clicking the ‘Log In’ button, you accept</string>
+    <string name="eula_2">the terms of the loyalty program.</string>
 </resources>

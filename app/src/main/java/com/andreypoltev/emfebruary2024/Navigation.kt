@@ -13,6 +13,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -76,15 +78,29 @@ fun Navigation(viewModel: MainViewModel) {
                     },
 //                    modifier = Modifier.padding(bottom = paddingValues),
                     icon = {
+
+                        val selected =
+                            currentDestination?.hierarchy?.any { it.route == screen.route }
+
                         if (screen.icon != null)
                             Icon(
                                 modifier = Modifier.padding(top = 4.dp, bottom = 12.dp),
                                 painter = painterResource(id = screen.icon),
-                                contentDescription = ""
+                                contentDescription = "",
+                                tint = if (selected == true) colorResource(id = R.color.element_pink) else colorResource(
+                                    id = R.color.element_dark_grey
+                                )
                             )
                     },
                     label = {
-                        Text(text = stringResource(id = screen.resourceId))
+                        val selected =
+                            currentDestination?.hierarchy?.any { it.route == screen.route }
+
+                        Text(
+                            text = stringResource(id = screen.resourceId),
+                            color = if (selected == true)
+                                colorResource(id = R.color.text_pink) else colorResource(id = R.color.text_dark_grey)
+                        )
                     }
                 )
 

@@ -23,4 +23,6 @@
     <string name="log_in">Войти</string>
     <string name="log_out">Выйти</string>
     <string name="add_to_cart">Добавить в корзину</string>
+    <string name="eula_1">Нажимая кнопку “Войти”, Вы принимаете</string>
+    <string name="eula_2">условия программы лояльности</string>
 </resources>

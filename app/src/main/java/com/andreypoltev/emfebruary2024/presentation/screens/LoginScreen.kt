@@ -21,10 +21,13 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.andreypoltev.emfebruary2024.MainViewModel
 import com.andreypoltev.emfebruary2024.R
 import com.andreypoltev.emfebruary2024.domain.User
@@ -102,6 +105,31 @@ fun LoginScreen(viewModel: MainViewModel) {
             }
 
             Text(text = "Phone is valid: $phoneIsValid")
+
+            Spacer(modifier = Modifier.weight(1f))
+
+            Column(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+
+                Text(
+                    text = stringResource(id = R.string.eula_1),
+                    fontSize = 10.sp,
+                    color = colorResource(
+                        id = R.color.text_grey
+                    )
+                )
+
+                Text(
+                    text = stringResource(id = R.string.eula_2),
+                    fontSize = 10.sp,
+                    color = colorResource(
+                        id = R.color.text_grey
+                    )
+                )
+
+            }
 
 
         }

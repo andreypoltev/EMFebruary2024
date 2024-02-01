@@ -1,5 +1,6 @@
 package com.andreypoltev.emfebruary2024.presentation.composables
 
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -14,24 +15,46 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import com.andreypoltev.emfebruary2024.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DetailsCard(icon: ImageVector, title: String, text: String?, onClick: () -> Unit = {}) {
+fun DetailsCard(
+    icon: Int,
+    tint: Int = R.color.black,
+    title: String,
+    text: String?,
+    onClick: () -> Unit = {}
+) {
 
 
-    Card(onClick = onClick, modifier = Modifier
-        .fillMaxWidth()
-        .onGloballyPositioned {
+    Card(
+        onClick = onClick, modifier = Modifier
+            .fillMaxWidth()
+            .onGloballyPositioned {
 //                             Log.d("", it.size.height.toString())
 
-        }, shape = RoundedCornerShape(8.dp)
+            }, shape = RoundedCornerShape(8.dp)
     ) {
         Row(modifier = Modifier.padding(8.dp), verticalAlignment = Alignment.CenterVertically) {
-            Icon(imageVector = icon, contentDescription = "Icon")
+            Box(
+                modifier = Modifier
+                    .size(24.dp),
+                contentAlignment = Alignment.Center
+            ) {
+
+                Icon(
+                    painter = painterResource(id = icon),
+                    contentDescription = "Icon",
+                    tint = colorResource(
+                        id = tint
+                    )
+                )
+            }
             Spacer(modifier = Modifier.size(16.dp))
             Column {
                 Text(text = title)

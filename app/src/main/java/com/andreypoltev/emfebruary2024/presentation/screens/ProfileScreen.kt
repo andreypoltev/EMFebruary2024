@@ -9,9 +9,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.outlined.Email
-import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
@@ -20,6 +18,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
@@ -52,7 +51,7 @@ fun ProfileScreen(viewModel: MainViewModel, navController: NavHostController) {
 
             if (user != null) {
                 DetailsCard(
-                    icon = Icons.Default.AccountCircle,
+                    icon = R.drawable.profile_icon,
                     title = "${user.name} ${user.lastName}",
                     text = user.phoneNumber
                 )
@@ -63,37 +62,41 @@ fun ProfileScreen(viewModel: MainViewModel, navController: NavHostController) {
             Spacer(modifier = Modifier.size(24.dp))
 
             DetailsCard(
-                Icons.Outlined.FavoriteBorder,
-                stringResource(id = R.string.favorites),
-                "${itemsInFavorites} ${stringResource(id = R.string.item)}",
-                onClick = {
-                    if (itemsInFavorites != 0) {
-                        navController.navigate(Screen.Favorites.route)
-                    } else {
-                        val message = context.getString(R.string.favorites_missing)
-                        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
-                    }
+                icon = R.drawable.heart_outlined,
+                tint = R.color.element_pink,
+                title = stringResource(id = R.string.favorites),
+                text = "$itemsInFavorites ${stringResource(id = R.string.item)}"
+            ) {
+                if (itemsInFavorites != 0) {
+                    navController.navigate(Screen.Favorites.route)
+                } else {
+                    val message = context.getString(R.string.favorites_missing)
+                    Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
                 }
-            )
+            }
             DetailsCard(
-                icon = Icons.Outlined.FavoriteBorder,
+                icon = R.drawable.stores,
+                tint = R.color.element_pink,
                 title = stringResource(id = R.string.stores),
-                null
+                text = null
             )
             DetailsCard(
-                icon = Icons.Outlined.Email,
+                icon = R.drawable.feedback,
+                tint = R.color.element_orange,
                 title = stringResource(id = R.string.feedback),
                 text = null
             )
 
             DetailsCard(
-                icon = Icons.Outlined.Email,
+                icon = R.drawable.eula,
+                tint = R.color.text_grey,
                 title = stringResource(id = R.string.eula),
                 text = null
             )
 
             DetailsCard(
-                icon = Icons.Outlined.Email,
+                icon = R.drawable.returns,
+                tint = R.color.text_grey,
                 title = stringResource(id = R.string.returns),
                 text = null
             )
