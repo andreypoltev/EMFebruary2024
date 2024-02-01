@@ -1,14 +1,11 @@
 package com.andreypoltev.emfebruary2024
 
 import android.os.Bundle
-import android.widget.ProgressBar
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.collectAsState
@@ -21,7 +18,6 @@ import com.andreypoltev.emfebruary2024.domain.LocalDatabase
 import com.andreypoltev.emfebruary2024.presentation.composables.CustomProgressIndicator
 import com.andreypoltev.emfebruary2024.presentation.screens.LoginScreen
 import com.andreypoltev.emfebruary2024.ui.theme.EMFebruary2024Theme
-import kotlinx.coroutines.flow.collectIndexed
 
 class MainActivity : ComponentActivity() {
 

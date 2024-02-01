@@ -3,7 +3,6 @@ package com.andreypoltev.emfebruary2024.domain
 import androidx.room.TypeConverter
 import com.andreypoltev.emfebruary2024.data.model.Feedback
 import com.andreypoltev.emfebruary2024.data.model.Info
-import com.andreypoltev.emfebruary2024.data.model.Item
 import com.andreypoltev.emfebruary2024.data.model.Price
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json

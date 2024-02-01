@@ -4,7 +4,6 @@ import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
-import com.andreypoltev.emfebruary2024.data.model.Item
 import kotlinx.coroutines.flow.Flow
 
 @Dao
