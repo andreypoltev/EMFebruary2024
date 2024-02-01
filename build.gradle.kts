@@ -2,13 +2,9 @@
 plugins {
 
     alias(libs.plugins.android.application) apply false
+    alias(libs.plugins.jetbrains.kotlin.android) apply false
 
-    id("org.jetbrains.kotlin.android") version "1.9.22" apply false
-    kotlin("plugin.serialization") version "1.9.22"
-    id("com.google.devtools.ksp") version "1.9.22-1.0.17" apply false
+    alias(libs.plugins.jetbrains.kotlin.plugin.serialization) apply false
+    alias(libs.plugins.google.devtools.ksp) apply false
 
-
-//    id("org.jetbrains.kotlin.android") version "1.9.10" apply false
-//    kotlin("plugin.serialization") version "1.9.10"
-//    id("com.google.devtools.ksp") version "1.9.10-1.0.13" apply false
 }
