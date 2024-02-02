@@ -1,6 +1,9 @@
 package com.andreypoltev.emfebruary2024.presentation.screens
 
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -19,8 +22,14 @@ fun CatalogScreen(viewModel: MainViewModel, navController: NavHostController) {
 
 //    if (false) {
     if (items.isNotEmpty()) {
+        Column {
+            Row {
+                Text(text = "По популярности")
+            }
 
         ItemsGrid(viewModel, items, navController)
+        }
+
 
 
     } else {

@@ -24,4 +24,6 @@
     <string name="add_to_cart">Add to Cart</string>
     <string name="eula_1">By clicking the ‘Log In’ button, you accept</string>
     <string name="eula_2">the terms of the loyalty program.</string>
+    <string name="name">Name</string>
+    <string name="last_name">Last name</string>
 </resources>

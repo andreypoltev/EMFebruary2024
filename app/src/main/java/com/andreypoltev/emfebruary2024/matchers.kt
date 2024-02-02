@@ -39,3 +39,6 @@ fun soFarSoGood(phoneNumber: String): Boolean {
 //    val pattern = Pattern.compile("^\\+\\d{1,3}\\s?\\d{1,3}\\s?\\d{1,4}\\s?\\d{1,4}\n")
     return pattern.matcher(phoneNumber).matches()
 }
+
+fun isStringValid(string: String) = string.matches(Regex("[А-яёЁ]+"))
+

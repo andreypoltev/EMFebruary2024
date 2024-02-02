@@ -25,4 +25,6 @@
     <string name="add_to_cart">Добавить в корзину</string>
     <string name="eula_1">Нажимая кнопку “Войти”, Вы принимаете</string>
     <string name="eula_2">условия программы лояльности</string>
+    <string name="name">Имя</string>
+    <string name="last_name">Фамилия</string>
 </resources>

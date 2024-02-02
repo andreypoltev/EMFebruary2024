@@ -1,10 +1,7 @@
 package com.andreypoltev.emfebruary2024.presentation.composables.topbars
 
-import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavHostController
 import com.andreypoltev.emfebruary2024.Screen
 
@@ -15,17 +12,16 @@ fun CustomTopBar(route: String?, navController: NavHostController) {
     when (route) {
 
         Screen.Main.route -> {
-            CenterAlignedTopAppBar(title = { Text(text = stringResource(id = Screen.Main.resourceId)) })
-
+            CustomCenterAlignedTopAppBar(Screen.Main.resourceId)
         }
 
         Screen.Cart.route -> {
-            CenterAlignedTopAppBar(title = { Text(text = stringResource(id = Screen.Cart.resourceId)) })
+            CustomCenterAlignedTopAppBar(Screen.Cart.resourceId)
 
         }
 
         Screen.Catalog.route -> {
-            CenterAlignedTopAppBar(title = { Text(text = stringResource(id = Screen.Catalog.resourceId)) })
+            CustomCenterAlignedTopAppBar(Screen.Catalog.resourceId)
 
         }
 
@@ -35,12 +31,12 @@ fun CustomTopBar(route: String?, navController: NavHostController) {
         }
 
         Screen.Offers.route -> {
-            CenterAlignedTopAppBar(title = { Text(text = stringResource(id = Screen.Offers.resourceId)) })
+            CustomCenterAlignedTopAppBar(Screen.Offers.resourceId)
 
         }
 
         Screen.Profile.route -> {
-            CenterAlignedTopAppBar(title = { Text(text = stringResource(id = Screen.Profile.resourceId)) })
+            CustomCenterAlignedTopAppBar(Screen.Profile.resourceId)
 
         }
 

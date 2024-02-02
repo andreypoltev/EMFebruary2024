@@ -29,6 +29,7 @@ class MainViewModel(val itemDao: ItemDao, val userDao: UserDao) : ViewModel() {
 
     fun clearDb() = viewModelScope.launch(Dispatchers.IO) {
         userDao.clearTable()
+        itemDao.clearTable()
     }
 
     fun flowRowCount() = itemDao.flowRowCount()

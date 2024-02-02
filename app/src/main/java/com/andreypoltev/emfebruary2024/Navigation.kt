@@ -13,7 +13,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -114,7 +113,7 @@ fun Navigation(viewModel: MainViewModel) {
 
         NavHost(
             navController = navController,
-            startDestination = Screen.CatalogRoute.route,
+            startDestination = Screen.Main.route,
             modifier = Modifier.padding(
                 start = 16.dp,
                 end = 16.dp,
