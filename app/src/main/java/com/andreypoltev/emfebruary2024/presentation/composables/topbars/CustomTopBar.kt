@@ -20,6 +20,11 @@ fun CustomTopBar(route: String?, navController: NavHostController) {
 
         }
 
+        Screen.Login.route -> {
+            CustomCenterAlignedTopAppBar(Screen.Login.resourceId)
+
+        }
+
         Screen.Catalog.route -> {
             CustomCenterAlignedTopAppBar(Screen.Catalog.resourceId)
 

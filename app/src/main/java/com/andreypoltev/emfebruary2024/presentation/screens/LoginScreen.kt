@@ -16,7 +16,6 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
@@ -33,30 +32,21 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import com.andreypoltev.emfebruary2024.MainViewModel
 import com.andreypoltev.emfebruary2024.R
+import com.andreypoltev.emfebruary2024.Screen
 import com.andreypoltev.emfebruary2024.domain.User
 import com.andreypoltev.emfebruary2024.isStringValid
 import com.andreypoltev.emfebruary2024.isValidPhoneNumber
-import com.andreypoltev.emfebruary2024.presentation.composables.topbars.CustomCenterAlignedTopAppBar
 import com.andreypoltev.emfebruary2024.soFarSoGood
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun LoginScreen(viewModel: MainViewModel) {
+fun LoginScreen(viewModel: MainViewModel, navController: NavHostController) {
 
 
-    Scaffold(topBar = {
-        CustomCenterAlignedTopAppBar(resourceId = R.string.login)
-    }) {
-        Column(
-            modifier = Modifier.padding(
-                start = 16.dp,
-                end = 16.dp,
-                top = it.calculateTopPadding(),
-                bottom = it.calculateBottomPadding()
-            )
-        ) {
+    Column {
 
 //            TextField(
 //                modifier = Modifier.fillMaxWidth(),
@@ -74,172 +64,174 @@ fun LoginScreen(viewModel: MainViewModel) {
 //                )
 //            )
 
-            val colors = TextFieldDefaults.colors(
-                focusedContainerColor = colorResource(id = R.color.background_light_grey),
-                unfocusedContainerColor = colorResource(id = R.color.background_light_grey),
-                focusedIndicatorColor = Color.Transparent,
-                unfocusedIndicatorColor = Color.Transparent,
+        val colors = TextFieldDefaults.colors(
+            focusedContainerColor = colorResource(id = R.color.background_light_grey),
+            unfocusedContainerColor = colorResource(id = R.color.background_light_grey),
+            focusedIndicatorColor = Color.Transparent,
+            unfocusedIndicatorColor = Color.Transparent,
 //                errorTextColor = Color.Red,
-                focusedLabelColor = colorResource(id = R.color.text_grey),
-                unfocusedLabelColor = colorResource(id = R.color.text_grey),
-            )
+            focusedLabelColor = colorResource(id = R.color.text_grey),
+            unfocusedLabelColor = colorResource(id = R.color.text_grey),
+        )
 
 
-            var name by remember { mutableStateOf("") }
-            var lastName by remember { mutableStateOf("") }
-            var phoneNumber by remember { mutableStateOf("") }
+        var name by remember { mutableStateOf("") }
+        var lastName by remember { mutableStateOf("") }
+        var phoneNumber by remember { mutableStateOf("") }
 
-            var phoneIsValid by remember { mutableStateOf(false) }
-            var nameIsValid by remember { mutableStateOf(false) }
-            var lastNameIsValid by remember { mutableStateOf(false) }
+        var phoneIsValid by remember { mutableStateOf(false) }
+        var nameIsValid by remember { mutableStateOf(false) }
+        var lastNameIsValid by remember { mutableStateOf(false) }
 
-            var validData = phoneIsValid && nameIsValid && lastNameIsValid
-
-
-            TextField(
-                isError = name.isNotEmpty() && !nameIsValid,
-                value = name,
-                onValueChange = {
-                    name = it
-                    nameIsValid = isStringValid(name)
-                },
-                label = { Text(stringResource(id = R.string.name)) },
-                trailingIcon = {
-                    if (name.isNotEmpty()) {
-                        IconButton(onClick = { name = "" }) {
-                            Icon(Icons.Default.Clear, "Clear name")
-                        }
-                    }
-                },
-                modifier = Modifier.fillMaxWidth(),
-                shape = RoundedCornerShape(8.dp),
-                colors = colors
-            )
-
-            Spacer(modifier = Modifier.size(8.dp))
-
-            TextField(
-                isError = lastName.isNotEmpty() && !lastNameIsValid,
-                value = lastName,
-                onValueChange = {
-                    lastName = it
-                    lastNameIsValid = isStringValid(lastName)
-                },
-                label = { Text(stringResource(id = R.string.last_name)) },
-                trailingIcon = {
-                    if (lastName.isNotEmpty()) {
-                        IconButton(onClick = { lastName = "" }) {
-                            Icon(Icons.Default.Clear, "Clear last name")
-                        }
-                    }
-                },
-                modifier = Modifier.fillMaxWidth(),
-                shape = RoundedCornerShape(8.dp),
-                colors = colors
-            )
-            Spacer(modifier = Modifier.size(8.dp))
-
-            TextField(
-                value = phoneNumber,
-                onValueChange = {
-                    if (soFarSoGood(it) && it.length <= 16) {
-                        phoneNumber = it
-
-                    }
-
-                    phoneIsValid = isValidPhoneNumber(phoneNumber)
+        var validData = phoneIsValid && nameIsValid && lastNameIsValid
 
 
-                },
-                label = { Text("+7 ХХХ ХХХ ХХ ХХ") },
-                trailingIcon = {
-                    if (phoneNumber.isNotEmpty()) {
-                        IconButton(onClick = { phoneNumber = "" }) {
-                            Icon(Icons.Default.Clear, "Clear phone number")
-                        }
-                    }
-                },
-                modifier = Modifier.fillMaxWidth(),
-                shape = RoundedCornerShape(8.dp),
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Phone),
-                colors = colors
-            )
-            Spacer(modifier = Modifier.size(32.dp))
-
-
-            if (validData) {
-
-                Card(
-                    shape = RoundedCornerShape(8.dp),
-                    modifier = Modifier.fillMaxWidth(),
-                    onClick = {
-
-                        viewModel.insertUser(User(phoneNumber, name, lastName))
-
-
-                    },
-                    colors = CardDefaults.cardColors(containerColor = colorResource(id = R.color.element_pink))
-                ) {
-                    Row(
-                        horizontalArrangement = Arrangement.Center,
-                        modifier = Modifier.fillMaxWidth()
-                    ) {
-                        Text(
-                            text = stringResource(id = R.string.log_in),
-                            modifier = Modifier.padding(16.dp)
-                        )
-
+        TextField(
+            isError = name.isNotEmpty() && !nameIsValid,
+            value = name,
+            onValueChange = {
+                name = it
+                nameIsValid = isStringValid(name)
+            },
+            label = { Text(stringResource(id = R.string.name)) },
+            trailingIcon = {
+                if (name.isNotEmpty()) {
+                    IconButton(onClick = { name = "" }) {
+                        Icon(Icons.Default.Clear, "Clear name")
                     }
                 }
+            },
+            modifier = Modifier.fillMaxWidth(),
+            shape = RoundedCornerShape(8.dp),
+            colors = colors
+        )
 
-            } else {
-                Card(
-                    shape = RoundedCornerShape(8.dp),
-                    modifier = Modifier.fillMaxWidth(),
-                    colors = CardDefaults.cardColors(containerColor = colorResource(id = R.color.element_light_pink))
-                ) {
-                    Row(
-                        horizontalArrangement = Arrangement.Center,
-                        modifier = Modifier.fillMaxWidth()
-                    ) {
-                        Text(
-                            text = stringResource(id = R.string.log_in),
-                            modifier = Modifier.padding(16.dp)
-                        )
+        Spacer(modifier = Modifier.size(8.dp))
 
+        TextField(
+            isError = lastName.isNotEmpty() && !lastNameIsValid,
+            value = lastName,
+            onValueChange = {
+                lastName = it
+                lastNameIsValid = isStringValid(lastName)
+            },
+            label = { Text(stringResource(id = R.string.last_name)) },
+            trailingIcon = {
+                if (lastName.isNotEmpty()) {
+                    IconButton(onClick = { lastName = "" }) {
+                        Icon(Icons.Default.Clear, "Clear last name")
                     }
                 }
-            }
+            },
+            modifier = Modifier.fillMaxWidth(),
+            shape = RoundedCornerShape(8.dp),
+            colors = colors
+        )
+        Spacer(modifier = Modifier.size(8.dp))
+
+        TextField(
+            value = phoneNumber,
+            onValueChange = {
+                if (soFarSoGood(it) && it.length <= 16) {
+                    phoneNumber = it
+
+                }
+
+                phoneIsValid = isValidPhoneNumber(phoneNumber)
 
 
+            },
+            label = { Text("+7 ХХХ ХХХ ХХ ХХ") },
+            trailingIcon = {
+                if (phoneNumber.isNotEmpty()) {
+                    IconButton(onClick = { phoneNumber = "" }) {
+                        Icon(Icons.Default.Clear, "Clear phone number")
+                    }
+                }
+            },
+            modifier = Modifier.fillMaxWidth(),
+            shape = RoundedCornerShape(8.dp),
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Phone),
+            colors = colors
+        )
+        Spacer(modifier = Modifier.size(32.dp))
 
-            Spacer(modifier = Modifier.weight(1f))
 
-            Column(
+        if (validData) {
+
+            Card(
+                shape = RoundedCornerShape(8.dp),
                 modifier = Modifier.fillMaxWidth(),
-                horizontalAlignment = Alignment.CenterHorizontally
+                onClick = {
+
+
+                    viewModel.insertUser(User(phoneNumber, name, lastName))
+                    navController.navigate(Screen.Main.route)
+
+
+                },
+                colors = CardDefaults.cardColors(containerColor = colorResource(id = R.color.element_pink))
             ) {
-
-                Text(
-                    text = stringResource(id = R.string.eula_1),
-                    fontSize = 10.sp,
-                    color = colorResource(
-                        id = R.color.text_grey
+                Row(
+                    horizontalArrangement = Arrangement.Center,
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Text(
+                        text = stringResource(id = R.string.log_in),
+                        modifier = Modifier.padding(16.dp)
                     )
-                )
 
-                Text(
-                    text = stringResource(id = R.string.eula_2),
-                    fontSize = 10.sp,
-                    color = colorResource(
-                        id = R.color.text_grey
-                    )
-                )
-
+                }
             }
 
+        } else {
+            Card(
+
+                shape = RoundedCornerShape(8.dp),
+                modifier = Modifier.fillMaxWidth(),
+                colors = CardDefaults.cardColors(containerColor = colorResource(id = R.color.element_light_pink))
+            ) {
+                Row(
+                    horizontalArrangement = Arrangement.Center,
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Text(
+                        text = stringResource(id = R.string.log_in),
+                        modifier = Modifier.padding(16.dp)
+                    )
+
+                }
+            }
+        }
+
+
+
+        Spacer(modifier = Modifier.weight(1f))
+
+        Column(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+
+            Text(
+                text = stringResource(id = R.string.eula_1),
+                fontSize = 10.sp,
+                color = colorResource(
+                    id = R.color.text_grey
+                )
+            )
+
+            Text(
+                text = stringResource(id = R.string.eula_2),
+                fontSize = 10.sp,
+                color = colorResource(
+                    id = R.color.text_grey
+                )
+            )
 
         }
+
+
     }
 
 

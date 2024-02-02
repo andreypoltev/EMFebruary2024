@@ -8,9 +8,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import com.andreypoltev.emfebruary2024.data.model.Price
 import com.andreypoltev.emfebruary2024.R
+import com.andreypoltev.emfebruary2024.data.model.Price
 
 @Composable
 fun PriceRow(price: Price) {
