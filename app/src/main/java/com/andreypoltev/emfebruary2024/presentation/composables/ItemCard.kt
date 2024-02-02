@@ -1,6 +1,7 @@
 package com.andreypoltev.emfebruary2024.presentation.composables
 
-import androidx.compose.foundation.background
+import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -8,6 +9,9 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -21,25 +25,17 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.geometry.RoundRect
-import androidx.compose.ui.geometry.Size
-import androidx.compose.ui.graphics.Outline
-import androidx.compose.ui.graphics.Shape
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.unit.Density
-import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import androidx.compose.ui.zIndex
+import com.andreypoltev.emfebruary2024.ImagesMapper
 import com.andreypoltev.emfebruary2024.MainViewModel
 import com.andreypoltev.emfebruary2024.R
 import com.andreypoltev.emfebruary2024.data.model.Item
-import kotlin.math.roundToInt
 
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
 @Composable
 fun ItemCard(viewModel: MainViewModel, item: Item, onClick: () -> Unit) {
 
@@ -54,17 +50,55 @@ fun ItemCard(viewModel: MainViewModel, item: Item, onClick: () -> Unit) {
     ) {
 
         Box(modifier = Modifier.fillMaxSize()) {
-
             FavoritesButton(
-                viewModel = viewModel, item = item, modifier = Modifier.align(
-                    Alignment.TopEnd
-                )
+                viewModel = viewModel, item = item, modifier = Modifier
+//                    .size(24.dp)
+                    .align(
+                        Alignment.TopEnd
+                    )
+                    .zIndex(1.0F)
             )
+
 
             Column(modifier = Modifier.padding(8.dp)) {
 
 
-                StrikePrice(item.price, 9.sp)
+                val images = ImagesMapper.imagesMap[item.id] ?: emptyList()
+
+                val pagerState = rememberPagerState {
+                    images.size
+                }
+
+
+                Box(modifier = Modifier.fillMaxSize()) {
+
+
+                    HorizontalPager(state = pagerState) {
+                        Image(
+                            painter = painterResource(id = images[it]),
+                            contentDescription = null
+                        )
+
+                    }
+
+                    val z = androidx.compose.ui.Alignment.BottomCenter
+
+                    PageIndicator(
+                        pagerState = pagerState,
+                        size = 4.dp,
+                        modifier = Modifier
+                            .wrapContentHeight()
+                            .align(Alignment.BottomCenter)
+                    )
+
+
+                }
+
+
+
+
+                StrikePrice(item.price, R.color.text_grey)
+
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Text(
                         text = "${item.price.priceWithDiscount} ${item.price.unit}",
@@ -73,55 +107,9 @@ fun ItemCard(viewModel: MainViewModel, item: Item, onClick: () -> Unit) {
 
                     Spacer(modifier = Modifier.size(8.dp))
 
-                    val radiusInDp = 4f
-                    val density = LocalContext.current.resources.displayMetrics.density
-                    val radiusInPixels = (radiusInDp * density).roundToInt()
-
-
-                    Box(
-                        modifier = Modifier
-                            .clip(object : Shape {
-                                override fun createOutline(
-                                    size: Size,
-                                    layoutDirection: LayoutDirection,
-                                    density: Density
-                                ): Outline {
-                                    return Outline.Rounded(
-                                        roundRect = RoundRect(
-                                            left = 0f,
-                                            top = size.height / 8,
-                                            right = size.width,
-                                            bottom = size.height * 7 / 8,
-                                            radiusX = radiusInPixels.toFloat(), // Adjust the radius as needed
-                                            radiusY = radiusInPixels.toFloat()  // Adjust the radius as needed
-                                        )
-                                    )
-
-                                }
-                            })
-                            .background(colorResource(id = R.color.background_pink))
-                    ) {
-
-
-                        Text(
-                            modifier = Modifier.padding(horizontal = 6.dp),
-                            text = "-${item.price.discount}%",
-                            fontSize = 9.sp,
-                            color = colorResource(id = R.color.text_white)
-//                            style = TextStyle(background = colorResource(id = R.color.background_pink))
-                        )
-                    }
-
-
-//                    // TODO Card looks weird
-//                    Card(shape = RoundedCornerShape(4.dp), modifier = Modifier.height(16.dp)) {
-//                        Column() {
-//
-//                        }
-//
-//                    }
-
+                    DiscountTag(item.price.discount)
                 }
+
                 Text(text = item.title)
                 Text(text = item.subtitle)
 
@@ -170,8 +158,6 @@ fun ItemCard(viewModel: MainViewModel, item: Item, onClick: () -> Unit) {
 
 
         }
-
-
     }
 
 }

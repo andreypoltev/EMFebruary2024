@@ -1,21 +1,26 @@
 package com.andreypoltev.emfebruary2024.presentation.screens
 
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Send
 import androidx.compose.material3.Card
-import androidx.compose.material3.Divider
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -28,19 +33,27 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.zIndex
 import androidx.navigation.NavHostController
+import com.andreypoltev.emfebruary2024.ImagesMapper
 import com.andreypoltev.emfebruary2024.MainViewModel
 import com.andreypoltev.emfebruary2024.R
 import com.andreypoltev.emfebruary2024.presentation.composables.BrandCard
+import com.andreypoltev.emfebruary2024.presentation.composables.CustomHorizontalPager
 import com.andreypoltev.emfebruary2024.presentation.composables.CustomProgressIndicator
 import com.andreypoltev.emfebruary2024.presentation.composables.Details
+import com.andreypoltev.emfebruary2024.presentation.composables.FavoritesButton
 import com.andreypoltev.emfebruary2024.presentation.composables.FeedbackRow
+import com.andreypoltev.emfebruary2024.presentation.composables.PageIndicator
 import com.andreypoltev.emfebruary2024.presentation.composables.PriceRow
+import com.andreypoltev.emfebruary2024.presentation.composables.StrikePrice
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
 @Composable
 fun ItemDetailsScreen(viewModel: MainViewModel, navController: NavHostController, id: String?) {
 
@@ -55,11 +68,41 @@ fun ItemDetailsScreen(viewModel: MainViewModel, navController: NavHostController
 
             Column(
                 modifier = Modifier
+                    .fillMaxWidth()
                     .weight(1f)
                     .verticalScroll(rememberScrollState())
             ) {
+                Box(modifier = Modifier.fillMaxWidth()) {
+                    FavoritesButton(
+                        viewModel = viewModel, item = item, modifier = Modifier
+//                    .size(24.dp)
+                            .align(
+                                Alignment.TopEnd
+                            )
+                            .zIndex(1.0F)
+                    )
 
-                Text(text = item.id)
+
+                    val images = ImagesMapper.imagesMap[item.id] ?: emptyList()
+
+                    val pagerState = rememberPagerState {
+                        images.size
+                    }
+
+                    CustomHorizontalPager(images, pagerState)
+
+                    PageIndicator(
+                        pagerState = pagerState,
+                        size = 6.dp,
+                        modifier = Modifier
+                            .wrapContentHeight()
+                            .align(Alignment.BottomCenter)
+                    )
+
+
+                }
+
+//                Text(text = item.id)
                 Text(text = item.title)
                 Text(text = item.subtitle)
 
@@ -69,7 +112,7 @@ fun ItemDetailsScreen(viewModel: MainViewModel, navController: NavHostController
 
                 Spacer(modifier = Modifier.size(10.dp))
 
-                Divider()
+                HorizontalDivider()
 
                 Spacer(modifier = Modifier.size(10.dp))
 
@@ -166,6 +209,7 @@ fun ItemDetailsScreen(viewModel: MainViewModel, navController: NavHostController
 
 
             Card(
+                colors = CardDefaults.cardColors(containerColor = colorResource(id = R.color.background_pink)),
                 onClick = {
 
                 },
@@ -174,12 +218,27 @@ fun ItemDetailsScreen(viewModel: MainViewModel, navController: NavHostController
                     .padding(bottom = 8.dp)
 //                .align(Alignment.BottomCenter), shape = RoundedCornerShape(8.dp)
             ) {
-                Row(modifier = Modifier.fillMaxWidth(),
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.Center
                 ) {
+                    Text(
+                        style = MaterialTheme.typography.titleMedium,
+                        color = colorResource(id = R.color.text_white),
+                        text = item.price.priceWithDiscount.toString() + item.price.unit,
+                        modifier = Modifier.padding(top = 16.dp, bottom = 16.dp, start = 16.dp)
+                    )
+
+                    Spacer(modifier = Modifier.size(8.dp))
+                    StrikePrice(price = item.price, R.color.text_light_pink)
+
+
+                    Spacer(modifier = Modifier.weight(1f))
 
                     Text(
+                        color = colorResource(id = R.color.text_white),
+                        fontWeight = FontWeight.SemiBold,
                         text = stringResource(id = R.string.add_to_cart),
                         modifier = Modifier.padding(16.dp)
                     )
@@ -192,3 +251,5 @@ fun ItemDetailsScreen(viewModel: MainViewModel, navController: NavHostController
         CustomProgressIndicator()
     }
 }
+
+
