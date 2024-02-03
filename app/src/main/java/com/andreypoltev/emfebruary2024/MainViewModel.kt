@@ -16,12 +16,34 @@ import io.ktor.serialization.kotlinx.json.json
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.launch
 
 class MainViewModel(val itemDao: ItemDao, val userDao: UserDao) : ViewModel() {
 
     private val _items = MutableStateFlow<List<Item>>(emptyList())
     val items = _items.asStateFlow()
+
+    private val _itemsFilteredByTag = MutableStateFlow<List<Item>>(emptyList())
+    val itemsFilteredByTag = _itemsFilteredByTag.asStateFlow()
+
+
+    fun setTag(tag: String) {
+        viewModelScope.launch {
+
+            if (tag == "show_all") {
+                _itemsFilteredByTag.value = _items.value
+            } else {
+                _itemsFilteredByTag.value = _items.value.filter {
+                    Log.d("", "Items tags: ${it.tags}")
+                    it.tags.any { it == tag }
+                }
+            }
+
+
+        }
+    }
+
 
     fun flowFavorites() = itemDao.flowAllItems()
 

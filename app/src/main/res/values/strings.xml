@@ -26,4 +26,9 @@
     <string name="eula_2">the terms of the loyalty program.</string>
     <string name="name">Name</string>
     <string name="last_name">Last name</string>
+    <string name="face">Face</string>
+    <string name="body">Body</string>
+    <string name="suntan">Suntan</string>
+    <string name="mask">Mask</string>
+    <string name="show_all_tags">Show all</string>
 </resources>

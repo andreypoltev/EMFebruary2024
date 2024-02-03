@@ -27,4 +27,9 @@
     <string name="eula_2">условия программы лояльности</string>
     <string name="name">Имя</string>
     <string name="last_name">Фамилия</string>
+    <string name="face">Лицо</string>
+    <string name="body">Тело</string>
+    <string name="suntan">Загар</string>
+    <string name="mask">Маска</string>
+    <string name="show_all_tags">Смотреть все</string>
 </resources>
