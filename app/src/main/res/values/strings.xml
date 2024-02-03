@@ -31,4 +31,8 @@
     <string name="suntan">Suntan</string>
     <string name="mask">Mask</string>
     <string name="show_all_tags">Show all</string>
+    <string name="sort_rating">By rating</string>
+    <string name="sort_by_price_desc">Expensive first</string>
+    <string name="sort_by_price_asc">Cheaper first</string>
+    <string name="by_default">By default</string>
 </resources>

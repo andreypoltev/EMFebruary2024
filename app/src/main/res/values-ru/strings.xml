@@ -32,4 +32,8 @@
     <string name="suntan">Загар</string>
     <string name="mask">Маска</string>
     <string name="show_all_tags">Смотреть все</string>
+    <string name="sort_rating">По популярности</string>
+    <string name="sort_by_price_desc">Сначала дороже</string>
+    <string name="sort_by_price_asc">Сначала дешевле</string>
+    <string name="by_default">По умолчанию</string>
 </resources>

@@ -16,7 +16,6 @@ import io.ktor.serialization.kotlinx.json.json
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.launch
 
 class MainViewModel(val itemDao: ItemDao, val userDao: UserDao) : ViewModel() {
@@ -24,8 +23,49 @@ class MainViewModel(val itemDao: ItemDao, val userDao: UserDao) : ViewModel() {
     private val _items = MutableStateFlow<List<Item>>(emptyList())
     val items = _items.asStateFlow()
 
-    private val _itemsFilteredByTag = MutableStateFlow<List<Item>>(emptyList())
+    private val _itemsFilteredByTag = _items
     val itemsFilteredByTag = _itemsFilteredByTag.asStateFlow()
+
+    private val _sortType = MutableStateFlow(SortType.byDefault)
+
+    private val _itemsFilteredAndSorted = _items
+    val itemsFilteredAndSorted = _itemsFilteredAndSorted.asStateFlow()
+
+
+    fun sortAndFilter() {
+
+    }
+
+    fun setSortType(sortType: String) {
+
+        when (sortType) {
+
+            SortType.byDefault -> {
+                _itemsFilteredAndSorted.value =
+                    _items.value
+            }
+
+            SortType.byRating -> {
+                _itemsFilteredAndSorted.value =
+                    _itemsFilteredAndSorted.value.sortedByDescending { it.feedback?.rating }
+            }
+
+            SortType.byPriceDesc -> {
+                _itemsFilteredAndSorted.value =
+                    _itemsFilteredAndSorted.value.sortedByDescending { it.price.priceWithDiscount.toInt() }
+            }
+
+            SortType.byPriceAsc -> {
+                _itemsFilteredAndSorted.value =
+                    _itemsFilteredAndSorted.value.sortedBy {
+                        Log.d("", it.price.priceWithDiscount)
+                        it.price.priceWithDiscount.toInt()
+                    }
+            }
+        }
+
+
+    }
 
 
     fun setTag(tag: String) {
