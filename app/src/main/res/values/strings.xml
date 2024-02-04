@@ -34,5 +34,5 @@
     <string name="sort_rating">By rating</string>
     <string name="sort_by_price_desc">Expensive first</string>
     <string name="sort_by_price_asc">Cheaper first</string>
-    <string name="by_default">By default</string>
+    <string name="sort_by_default">By default</string>
 </resources>

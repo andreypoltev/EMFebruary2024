@@ -13,6 +13,10 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -32,6 +36,8 @@ fun SortDropdownMenu(
     onDismissRequest: () -> Unit
 ) {
 
+    var sortType by remember { mutableStateOf(R.string.sort_by_default)}
+
 
     Card(
         onClick = onClick,
@@ -45,7 +51,7 @@ fun SortDropdownMenu(
             Icon(painter = painterResource(id = R.drawable.sort_icon), contentDescription = null)
 
 
-            Text(text = "Сортировка", modifier = Modifier.padding(8.dp))
+            Text(text = stringResource(id = sortType), modifier = Modifier.padding(8.dp))
             DropdownMenu(
                 modifier = Modifier
                     .clip(RoundedCornerShape(10.dp))
@@ -55,9 +61,10 @@ fun SortDropdownMenu(
             ) {
 
                 DropdownMenuItem(
-                    text = { Text(text = stringResource(id = R.string.by_default)) },
+                    text = { Text(text = stringResource(id = R.string.sort_by_default)) },
                     onClick = {
                         viewModel.setSortType(SortType.byDefault)
+                        sortType = R.string.sort_by_default
                         isExpanded.value = false
                     })
 
@@ -65,6 +72,7 @@ fun SortDropdownMenu(
                     text = { Text(text = stringResource(id = R.string.sort_rating)) },
                     onClick = {
                         viewModel.setSortType(SortType.byRating)
+                        sortType = R.string.sort_rating
                         isExpanded.value = false
                     })
 
@@ -72,6 +80,7 @@ fun SortDropdownMenu(
                     text = { Text(text = stringResource(id = R.string.sort_by_price_desc)) },
                     onClick = {
                         viewModel.setSortType(SortType.byPriceDesc)
+                        sortType = R.string.sort_by_price_desc
                         isExpanded.value = false
                     })
 
@@ -79,6 +88,7 @@ fun SortDropdownMenu(
                     text = { Text(text = stringResource(id = R.string.sort_by_price_asc)) },
                     onClick = {
                         viewModel.setSortType(SortType.byPriceAsc)
+                        sortType = R.string.sort_by_price_asc
                         isExpanded.value = false
                     })
 
