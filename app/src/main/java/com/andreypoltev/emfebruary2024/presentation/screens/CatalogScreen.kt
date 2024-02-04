@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -17,12 +16,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.andreypoltev.emfebruary2024.MainViewModel
-import com.andreypoltev.emfebruary2024.presentation.composables.CustomProgressIndicator
-import com.andreypoltev.emfebruary2024.presentation.composables.ItemsGrid
-import com.andreypoltev.emfebruary2024.presentation.composables.TagFilterCard
 import com.andreypoltev.emfebruary2024.R
 import com.andreypoltev.emfebruary2024.Tag
+import com.andreypoltev.emfebruary2024.presentation.composables.CustomProgressIndicator
+import com.andreypoltev.emfebruary2024.presentation.composables.ItemsGrid
 import com.andreypoltev.emfebruary2024.presentation.composables.SortDropdownMenu
+import com.andreypoltev.emfebruary2024.presentation.composables.TagFilterCard
 
 
 @Composable
