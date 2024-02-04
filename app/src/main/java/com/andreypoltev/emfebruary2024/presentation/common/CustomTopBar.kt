@@ -3,9 +3,9 @@ package com.andreypoltev.emfebruary2024.presentation.common
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
-import com.andreypoltev.emfebruary2024.util.Screen
 import com.andreypoltev.emfebruary2024.presentation.favorites_screen.FavoritesTopBar
 import com.andreypoltev.emfebruary2024.presentation.item_details_screen.composables.ItemDetailsTopBar
+import com.andreypoltev.emfebruary2024.util.Screen
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

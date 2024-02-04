@@ -10,8 +10,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavHostController
-import com.andreypoltev.emfebruary2024.util.Screen
 import com.andreypoltev.emfebruary2024.R
+import com.andreypoltev.emfebruary2024.util.Screen
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

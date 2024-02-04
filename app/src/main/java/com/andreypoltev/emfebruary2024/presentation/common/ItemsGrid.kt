@@ -8,8 +8,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.andreypoltev.emfebruary2024.MainViewModel
-import com.andreypoltev.emfebruary2024.util.Screen
 import com.andreypoltev.emfebruary2024.data.model.Item
+import com.andreypoltev.emfebruary2024.util.Screen
 
 @Composable
 fun ItemsGrid(viewModel: MainViewModel, items: List<Item>, navController: NavHostController) {

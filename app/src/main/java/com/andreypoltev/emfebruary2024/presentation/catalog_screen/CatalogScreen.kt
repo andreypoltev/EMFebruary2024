@@ -27,9 +27,9 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.andreypoltev.emfebruary2024.MainViewModel
 import com.andreypoltev.emfebruary2024.R
-import com.andreypoltev.emfebruary2024.util.Tag
 import com.andreypoltev.emfebruary2024.presentation.common.CustomProgressIndicator
 import com.andreypoltev.emfebruary2024.presentation.common.ItemsGrid
+import com.andreypoltev.emfebruary2024.util.Tag
 
 
 @Composable

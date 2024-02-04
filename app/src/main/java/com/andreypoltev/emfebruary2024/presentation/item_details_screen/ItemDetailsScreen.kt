@@ -42,7 +42,6 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import androidx.navigation.NavHostController
-import com.andreypoltev.emfebruary2024.util.ImagesMapper
 import com.andreypoltev.emfebruary2024.MainViewModel
 import com.andreypoltev.emfebruary2024.R
 import com.andreypoltev.emfebruary2024.presentation.common.CustomProgressIndicator
@@ -51,6 +50,7 @@ import com.andreypoltev.emfebruary2024.presentation.common.PageIndicator
 import com.andreypoltev.emfebruary2024.presentation.common.StrikePrice
 import com.andreypoltev.emfebruary2024.presentation.item_details_screen.composables.Details
 import com.andreypoltev.emfebruary2024.presentation.item_details_screen.composables.PriceRow
+import com.andreypoltev.emfebruary2024.util.ImagesMapper
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
 @Composable

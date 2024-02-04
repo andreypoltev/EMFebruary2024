@@ -36,11 +36,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.andreypoltev.emfebruary2024.MainViewModel
 import com.andreypoltev.emfebruary2024.R
-import com.andreypoltev.emfebruary2024.util.Screen
 import com.andreypoltev.emfebruary2024.domain.User
+import com.andreypoltev.emfebruary2024.presentation.common.CustomCenterAlignedTopAppBar
+import com.andreypoltev.emfebruary2024.util.Screen
 import com.andreypoltev.emfebruary2024.util.isStringValid
 import com.andreypoltev.emfebruary2024.util.isValidPhoneNumber
-import com.andreypoltev.emfebruary2024.presentation.common.CustomCenterAlignedTopAppBar
 import com.andreypoltev.emfebruary2024.util.soFarSoGood
 
 @OptIn(ExperimentalMaterial3Api::class)

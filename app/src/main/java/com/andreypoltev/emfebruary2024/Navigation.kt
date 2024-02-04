@@ -24,9 +24,9 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
-import com.andreypoltev.emfebruary2024.presentation.common.CustomTopBar
 import com.andreypoltev.emfebruary2024.presentation.cart_screen.CartScreen
 import com.andreypoltev.emfebruary2024.presentation.catalog_screen.CatalogScreen
+import com.andreypoltev.emfebruary2024.presentation.common.CustomTopBar
 import com.andreypoltev.emfebruary2024.presentation.favorites_screen.FavoritesScreen
 import com.andreypoltev.emfebruary2024.presentation.item_details_screen.ItemDetailsScreen
 import com.andreypoltev.emfebruary2024.presentation.main_screen.MainScreen
