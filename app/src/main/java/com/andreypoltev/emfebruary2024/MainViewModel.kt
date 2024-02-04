@@ -8,6 +8,8 @@ import com.andreypoltev.emfebruary2024.data.model.Item
 import com.andreypoltev.emfebruary2024.domain.ItemDao
 import com.andreypoltev.emfebruary2024.domain.User
 import com.andreypoltev.emfebruary2024.domain.UserDao
+import com.andreypoltev.emfebruary2024.util.SortType
+import com.andreypoltev.emfebruary2024.util.Tags
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
@@ -164,7 +166,7 @@ class MainViewModel(val itemDao: ItemDao, val userDao: UserDao) : ViewModel() {
 
 
 
-            Log.d("MyResponse", response.body())
+//            Log.d("MyResponse", response.body())
 //            Log.d("MyResponse", response.status.toString())
 
 //            val r: APIResponse = response.body<APIResponse>()

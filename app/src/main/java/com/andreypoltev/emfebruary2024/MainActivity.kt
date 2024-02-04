@@ -8,11 +8,14 @@ import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.room.Room
 import com.andreypoltev.emfebruary2024.domain.LocalDatabase
+import com.andreypoltev.emfebruary2024.presentation.login_screen.LoginScreen
 import com.andreypoltev.emfebruary2024.ui.theme.EMFebruary2024Theme
 
 class MainActivity : ComponentActivity() {
@@ -70,8 +73,17 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
 
-                    Navigation(viewModel = viewModel)
+                    val usersCount by viewModel.flowUserCount().collectAsState(null)
 
+                    if (usersCount != null) {
+
+                        if (usersCount == 0) {
+                            LoginScreen(viewModel = viewModel)
+                        } else {
+                            Navigation(viewModel = viewModel)
+                        }
+
+                    }
 
                 }
             }

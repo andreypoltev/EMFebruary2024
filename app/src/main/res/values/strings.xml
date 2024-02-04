@@ -36,4 +36,5 @@
     <string name="sort_by_price_asc">Cheaper first</string>
     <string name="sort_by_default">By default</string>
     <string name="filters">Filters</string>
+    <string name="in_stock">In stock</string>
 </resources>
