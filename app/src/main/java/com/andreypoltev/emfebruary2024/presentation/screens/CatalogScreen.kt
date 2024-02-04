@@ -52,10 +52,10 @@ fun CatalogScreen(viewModel: MainViewModel, navController: NavHostController) {
 
 
                 items(tags) { tag ->
-                    TagFilterCard(tag.stringResource, onClick = {
+                    TagFilterCard(viewModel, tag.stringResource, tag.tag) {
                         Log.d("", "Tag is: ${tag.tag}")
                         viewModel.setTag(tag.tag)
-                    })
+                    }
 
                 }
 

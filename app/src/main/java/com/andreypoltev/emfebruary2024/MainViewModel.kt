@@ -28,6 +28,7 @@ class MainViewModel(val itemDao: ItemDao, val userDao: UserDao) : ViewModel() {
 
     private val _sortType = MutableStateFlow(SortType.byDefault)
     private val _filterTag = MutableStateFlow(Tags.showAll.tag)
+    val filterTag = _filterTag.asStateFlow()
 
     private fun sort(items: List<Item>, sortType: String): List<Item> {
         return when (sortType) {
