@@ -21,20 +21,14 @@ import com.andreypoltev.emfebruary2024.presentation.composables.CustomProgressIn
 import com.andreypoltev.emfebruary2024.presentation.composables.ItemsGrid
 import com.andreypoltev.emfebruary2024.presentation.composables.TagFilterCard
 import com.andreypoltev.emfebruary2024.R
+import com.andreypoltev.emfebruary2024.Tag
 import com.andreypoltev.emfebruary2024.presentation.composables.SortDropdownMenu
 
-data class Tag(
-    val tag: String,
-    val stringResource: Int
-)
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CatalogScreen(viewModel: MainViewModel, navController: NavHostController) {
 
-    val items by viewModel.items.collectAsState()
-
-    val itemsFilteredAndSorted by viewModel.itemsFilteredAndSorted.collectAsState()
+    val itemsFilteredAndSorted by viewModel.items().collectAsState(initial = emptyList())
 
     val tags = listOf(
         Tag("show_all", R.string.show_all_tags),
@@ -47,7 +41,7 @@ fun CatalogScreen(viewModel: MainViewModel, navController: NavHostController) {
     if (itemsFilteredAndSorted.isNotEmpty()) {
         Column {
 
-            var isExpanded = remember { mutableStateOf(false) }
+            val isExpanded = remember { mutableStateOf(false) }
 
             SortDropdownMenu(
                 viewModel = viewModel,

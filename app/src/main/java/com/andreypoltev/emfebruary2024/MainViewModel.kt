@@ -14,8 +14,11 @@ import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.request.get
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
 
 class MainViewModel(val itemDao: ItemDao, val userDao: UserDao) : ViewModel() {
@@ -23,45 +26,60 @@ class MainViewModel(val itemDao: ItemDao, val userDao: UserDao) : ViewModel() {
     private val _items = MutableStateFlow<List<Item>>(emptyList())
     val items = _items.asStateFlow()
 
-    private val _itemsFilteredByTag = _items
-    val itemsFilteredByTag = _itemsFilteredByTag.asStateFlow()
-
     private val _sortType = MutableStateFlow(SortType.byDefault)
+    private val _filterTag = MutableStateFlow(Tags.showAll.tag)
 
-    private val _itemsFilteredAndSorted = _items
-    val itemsFilteredAndSorted = _itemsFilteredAndSorted.asStateFlow()
+    private fun sort(items: List<Item>, sortType: String): List<Item> {
+        return when (sortType) {
+            SortType.byDefault -> {
+                items
+            }
+
+            SortType.byRating -> {
+                items.sortedByDescending { it.feedback?.rating }
+            }
+
+            SortType.byPriceDesc -> {
+                items.sortedByDescending { it.price.priceWithDiscount.toInt() }
+            }
+
+            SortType.byPriceAsc -> {
+                items.sortedBy {
+                    it.price.priceWithDiscount.toInt()
+                }
+            }
+
+            else -> {
+                items // or throw an exception, or handle this case differently
+            }
+        }
+    }
+
+    private fun filter(items: List<Item>, tag: String): List<Item> {
+
+        return if (tag == Tags.showAll.tag) {
+
+            items
+
+        } else {
+
+            items.filter { it.tags.any { it == tag } }
+
+        }
 
 
-    fun sortAndFilter() {
+    }
 
+    fun items(): Flow<List<Item>> {
+        return combine(items, _filterTag, _sortType) { items, filterTag, sortType ->
+            sort(filter(items, filterTag), sortType)
+        }.flowOn(Dispatchers.IO)
     }
 
     fun setSortType(sortType: String) {
 
-        when (sortType) {
-
-            SortType.byDefault -> {
-                _itemsFilteredAndSorted.value =
-                    _items.value
-            }
-
-            SortType.byRating -> {
-                _itemsFilteredAndSorted.value =
-                    _itemsFilteredAndSorted.value.sortedByDescending { it.feedback?.rating }
-            }
-
-            SortType.byPriceDesc -> {
-                _itemsFilteredAndSorted.value =
-                    _itemsFilteredAndSorted.value.sortedByDescending { it.price.priceWithDiscount.toInt() }
-            }
-
-            SortType.byPriceAsc -> {
-                _itemsFilteredAndSorted.value =
-                    _itemsFilteredAndSorted.value.sortedBy {
-                        Log.d("", it.price.priceWithDiscount)
-                        it.price.priceWithDiscount.toInt()
-                    }
-            }
+        viewModelScope.launch(Dispatchers.IO) {
+            _sortType.value = sortType
         }
 
 
@@ -70,18 +88,9 @@ class MainViewModel(val itemDao: ItemDao, val userDao: UserDao) : ViewModel() {
 
     fun setTag(tag: String) {
         viewModelScope.launch {
-
-            if (tag == "show_all") {
-                _itemsFilteredByTag.value = _items.value
-            } else {
-                _itemsFilteredByTag.value = _items.value.filter {
-                    Log.d("", "Items tags: ${it.tags}")
-                    it.tags.any { it == tag }
-                }
-            }
-
-
+            _filterTag.value = tag
         }
+
     }
 
 
@@ -152,7 +161,9 @@ class MainViewModel(val itemDao: ItemDao, val userDao: UserDao) : ViewModel() {
             val response = client.get(link)
             client.close()
 
-//            Log.d("MyResponse", response.body())
+
+
+            Log.d("MyResponse", response.body())
 //            Log.d("MyResponse", response.status.toString())
 
 //            val r: APIResponse = response.body<APIResponse>()
